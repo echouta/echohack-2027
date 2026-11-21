@@ -5,11 +5,15 @@
   --foreground: #171717;
 }
 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* from layout.tsx */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-craze: var(--font-craze);
+  --font-thezore: var(--font-thezore);
 }
 
 @media (prefers-color-scheme: dark) {

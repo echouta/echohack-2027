@@ -21,8 +21,19 @@ export default function LoginPage() {
     }
   }
 
+  async function login() {
+
+  }
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-blue-900">
+      <p>Login</p>
+      <button
+        onClick={login}
+        className="rounded-lg bg-white px-6 py-3 font-semibold text-blue-900 hover:bg-blue-100"
+      >
+        Sign In
+      </button>
       <button
         onClick={signInWithGoogle}
         className="rounded-lg bg-white px-6 py-3 font-semibold text-blue-900 hover:bg-blue-100"

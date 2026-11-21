@@ -24,7 +24,7 @@ async function UserInfo() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold">You're logged in</h1>
+      <h1 className="text-3xl font-bold">You&#39;re logged in</h1 >
       <p className="mt-2">{data.claims.email}</p>
     </>
   );
