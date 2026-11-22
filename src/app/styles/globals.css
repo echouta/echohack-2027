@@ -69,6 +69,8 @@ body {
   --rise-duration: 0.9s;
   --enlarge-delay: 2s;
   --enlarge-duration: 0.7s;
+  --exit-delay: 2s;
+  --exit-duration: 1.2s;
 
   position: relative;
   width: var(--s);
@@ -81,6 +83,12 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateX(calc(var(--iso-tilt) * -1)) rotateY(calc(var(--iso-turn) * -1));
+}
+
+.box {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
 }
 
 .face {
@@ -201,13 +209,27 @@ body {
     var(--enlarge-delay) both;
 }
 
-/* The visible box holding the elements (old .card sizing) */
 .card-content {
   position: absolute;
   top: -2.5rem;
   left: -4.5rem;
   width: 9rem;
   height: 5rem;
+}
+
+.flaps-open .box {
+  animation: box-exit var(--exit-duration)
+    cubic-bezier(0.55, 0, 0.8, 0.4)
+    var(--exit-delay) both;
+}
+
+.flaps-open .face,
+.flaps-open .flap-side {
+  animation: fade-out var(--exit-duration) linear var(--exit-delay) both;
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
 }
 
 @keyframes flap-open {
@@ -235,5 +257,14 @@ body {
   }
   to {
     transform: scale(2.5) translateY(3.2rem); 
+  }
+}
+
+@keyframes box-exit {
+  from {
+    transform: translateY(0) rotateY(0deg);
+  }
+  to   { 
+    transform: translateY(12rem) rotateY(540deg);
   }
 }

@@ -43,36 +43,40 @@ export default function Home() {
           onClick={() => setIsOpen(true)}
         >
           <div className="cube">
-            {/* inside */}
-            <div className="face face--back" />
-            <div className="face face--left" />
-            <div className="face face--bottom" />
-
-            {/* what's in the box */}
-            <div className="card">
-              <div className="reveal">
-                <div className="card-scale">
-                  <div className="card-content flex flex-col items-center justify-center text-white">
-                    <span className="text-xs font-mono">Save the date</span>
-                    <span className="text-1xl font-craze font-bold text-shadow-[4px_4px_0_#f84535] items-left text-outline">APR 2027</span>
-                    <img src={theme_photo.src} className="w-32 h-auto object-contain" />
-                  </div>
-                </div>
-              </div>
+            <div className="box">
+              {/* inside */}
+              <div className="face face--back" />
+              <div className="face face--left" />
+              <div className="face face--bottom" />
             </div>
-            <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
-            <div className={`face face--right bg-clash-right ${faceText}`}>27</div>
-            
-            {flaps.map(({ side, pair, color }) => (
-              <div key={side} className={`flap-wrap flap-wrap--${side} flap-wrap--${pair}`}>
-                <div className="flap-hinge">
-                  <div className="flap">
-                    <div className="flap-side flap-side--inner" />
-                    <div className={`flap-side flap-side--outer ${color}`} />
+
+              {/* what's in the box */}
+              <div className="card">
+                <div className="reveal">
+                  <div className="card-scale">
+                    <div className="card-content flex flex-col items-center justify-center text-white">
+                      <span className="text-xs font-mono">Save the date</span>
+                      <span className="text-1xl font-craze font-bold text-shadow-[4px_4px_0_#f84535] items-left text-outline">APR 2027</span>
+                      <img src={theme_photo.src} className="w-32 h-auto object-contain" />
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
+            <div className="box">
+              <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
+              <div className={`face face--right bg-clash-right ${faceText}`}>27</div>
+              
+              {flaps.map(({ side, pair, color }) => (
+                <div key={side} className={`flap-wrap flap-wrap--${side} flap-wrap--${pair}`}>
+                  <div className="flap-hinge">
+                    <div className="flap">
+                      <div className="flap-side flap-side--inner" />
+                      <div className={`flap-side flap-side--outer ${color}`} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
