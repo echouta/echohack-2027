@@ -4,8 +4,17 @@ import { useState } from "react";
 import theme_photo from "../assets/images/echo-hack_27_logo.png";
 import absolute_bg from "../assets/images/absolute-bg.png";
 
+const SHAKE_MS = 800;
+
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "shaking" | "open">("idle");
+  const isOpen = phase === "open";
+
+  const handleClick = () => {
+    if (phase !== "idle") return; // ignore extra clicks mid-shake
+    setPhase("shaking");
+    setTimeout(() => setPhase("open"), SHAKE_MS);
+  };
 
   const faceText =
     "text-outline text-white text-8xl font-craze font-bold select-none";
@@ -38,17 +47,20 @@ export default function Home() {
       {/* room above the box for the card to come out */}
       <div className="mt-45 mb-8">
         <div
-          className={`scene cursor-pointer ${isOpen ? "flaps-open" : ""}`}
+          className={`scene ${phase === "idle" ? "cursor-pointer" : ""
+          } ${phase === "shaking" ? "is-shaking" : ""
+          } ${isOpen ? "flaps-open" : ""}`}
           role="button"
-          onClick={() => setIsOpen(true)}
+          onClick={handleClick}
         >
           <div className="cube">
-            <div className="box">
-              {/* inside */}
-              <div className="face face--back" />
-              <div className="face face--left" />
-              <div className="face face--bottom" />
-            </div>
+            <div className="shaker">
+              <div className="box">
+                {/* inside */}
+                <div className="face face--back" />
+                <div className="face face--left" />
+                <div className="face face--bottom" />
+              </div>
 
               {/* what's in the box */}
               <div className="card">
@@ -62,20 +74,21 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            <div className="box">
-              <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
-              <div className={`face face--right bg-clash-right ${faceText}`}>27</div>
-              
-              {flaps.map(({ side, pair, color }) => (
-                <div key={side} className={`flap-wrap flap-wrap--${side} flap-wrap--${pair}`}>
-                  <div className="flap-hinge">
-                    <div className="flap">
-                      <div className="flap-side flap-side--inner" />
-                      <div className={`flap-side flap-side--outer ${color}`} />
+
+              <div className="box">
+                <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
+                <div className={`face face--right bg-clash-right ${faceText}`}>27</div>
+                {flaps.map(({ side, pair, color }) => (
+                  <div key={side} className={`flap-wrap flap-wrap--${side} flap-wrap--${pair}`}>
+                    <div className="flap-hinge">
+                      <div className="flap">
+                        <div className="flap-side flap-side--inner" />
+                        <div className={`flap-side flap-side--outer ${color}`} />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

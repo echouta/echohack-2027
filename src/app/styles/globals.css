@@ -63,6 +63,7 @@ body {
   --iso-turn: 45deg;
 
   /* animation timeline */
+  --shake-duration: 0.8s;      /* keep in sync with SHAKE_MS in page.tsx */
   --flap-duration: 0.7s;
   --flap-stagger: 0.55s;
   --reveal-delay: 1.1s;
@@ -83,6 +84,41 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateX(calc(var(--iso-tilt) * -1)) rotateY(calc(var(--iso-turn) * -1));
+}
+
+.shaker {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100% 0;
+}
+
+.is-shaking .shaker {
+  animation: shake-3d var(--shake-duration) ease-in-out both;
+}
+
+@keyframes shake-3d {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  12% {
+    transform: translateY(-8px) rotateX(9deg) rotateY(5deg) rotateZ(-9deg);
+  }
+  28% {
+    transform: translateY(0) rotateX(-9deg) rotateY(-5deg) rotateZ(9deg);
+  }
+  44% {
+    transform: translateY(-6px) rotateX(-8deg) rotateY(4deg) rotateZ(-8deg);
+  }
+  60% {
+    transform: translateY(0) rotateX(8deg) rotateY(-4deg) rotateZ(7deg);
+  }
+  76% {
+    transform: translateY(-3px) rotateX(4deg) rotateY(2deg) rotateZ(-4deg);
+  }
+  88% {
+    transform: translateY(0) rotateX(-2deg) rotateY(-1deg) rotateZ(2deg);
+  }
 }
 
 .box {
@@ -144,7 +180,7 @@ body {
   transform: var(--hinge-position) rotateX(0deg);
 }
 
-/* Only animate after clicking */
+/* Only animate after the shake finishes and flaps-open is applied */
 .flaps-open .flap-hinge {
   animation: flap-open var(--flap-duration)
     cubic-bezier(0.34, 1.4, 0.64, 1)
