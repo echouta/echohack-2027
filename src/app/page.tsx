@@ -1,4 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import theme_photo from "../assets/images/echo-hack_27_logo.png";
+
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const faceText =
     "text-outline text-white text-8xl font-craze font-bold select-none";
 
@@ -11,14 +18,18 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center overflow-x-hidden">
+    <main className="bg-gradient-to-t from-white to-[#adc5cf] min-h-screen flex flex-col items-center justify-center overflow-x-hidden">
       <h1 className="text-5xl font-craze text-white text-outline text-shadow-[6px_6px_0_#f84535]">
         ECHOHack 2027
       </h1>
 
       {/* room above the box for the card to come out */}
       <div className="mt-52 mb-8">
-        <div className="scene" aria-hidden="true">
+        <div
+          className={`scene cursor-pointer ${isOpen ? "flaps-open" : ""}`}
+          role="button"
+          onClick={() => setIsOpen((o) => true)}
+        >
           <div className="cube">
             {/* inside */}
             <div className="face face--back" />
@@ -27,9 +38,10 @@ export default function Home() {
 
             {/* what's in the box */}
             <div className="reveal">
-              <div className="card flex flex-col items-center justify-center border border-foreground bg-black text-white">
+              <div className="card flex flex-col items-center justify-center">
+                <img src={theme_photo.src} className="w-32 h-auto object-contain"/>
                 <span className="text-xs font-mono">Save the date</span>
-                <span className="text-3xl font-craze font-bold text-shadow-[4px_4px_0_#f84535] items-left">APR 2027</span>
+                <span className="text-2xl font-craze font-bold text-shadow-[4px_4px_0_#f84535] items-left text-white text-outline">APR 2027</span>
               </div>
             </div>
             <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
