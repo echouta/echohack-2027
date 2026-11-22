@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import theme_photo from "../assets/images/echo-hack_27_logo.png";
+import absolute_bg from "../assets/images/absolute-bg.png";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +19,28 @@ export default function Home() {
   ];
 
   return (
-    <main className="bg-gradient-to-t from-white to-[#adc5cf] min-h-screen flex flex-col items-center justify-center overflow-x-hidden">
-      <h1 className="text-5xl font-craze text-white text-outline text-shadow-[6px_6px_0_#f84535]">
+    <main className="relative isolate bg-gradient-to-t from-white to-[#adc5cf] min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 transition-opacity duration-[1800ms] ease-out"
+        style={{
+          opacity: isOpen ? 1 : 0,
+          transitionDelay: isOpen ? "1.6s" : "0s",
+        }}
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center animate-drift"
+          style={{ backgroundImage: `url(${absolute_bg.src})` }}
+        />
+      </div>
+
+      <h1
+        className={`text-5xl font-craze text-white text-outline transition-[text-shadow] duration-1000 delay-[1600ms] ${
+          isOpen
+            ? "text-shadow-[6px_6px_0_#120403]"
+            : "text-shadow-[6px_6px_0_#f84535]"
+        }`}
+      >
         ECHOHack 2027
       </h1>
 
@@ -28,7 +49,7 @@ export default function Home() {
         <div
           className={`scene cursor-pointer ${isOpen ? "flaps-open" : ""}`}
           role="button"
-          onClick={() => setIsOpen((o) => true)}
+          onClick={() => setIsOpen(true)}
         >
           <div className="cube">
             {/* inside */}
