@@ -78,12 +78,30 @@ body {
   height: var(--s);
 }
 
+/* outer wrapper holds the camera tilt */
+.cube-spin {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--iso-tilt) * -1));
+}
+
 .cube {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transform: rotateX(calc(var(--iso-tilt) * -1)) rotateY(calc(var(--iso-turn) * -1));
+  transform: rotateY(calc(var(--iso-turn) * -1));
+  animation: spinIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes spinIn {
+  from {
+    transform: translateX(-1000px) rotateY(calc(var(--iso-turn) * -1));
+  }
+  to {
+    transform: translateX(0) rotateY(calc(var(--iso-turn) * -1 + 720deg));
+  }
 }
 
 .shaker {

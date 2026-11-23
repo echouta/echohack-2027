@@ -43,6 +43,9 @@ export default function Home() {
       <h1 className={`text-5xl font-craze text-white text-outline transition-[text-shadow] duration-1000 delay-[1600ms] text-shadow-[6px_6px_0_#f84535]`}>
         ECHOHack 2027
       </h1>
+      <span className={`text-xs font-thezore ${phase === "open" ? "text-white" : ""}`}>Save the date</span>
+      <span className="text-2xl font-craze text-white font-bold text-shadow-[4px_4px_0_#f84535] items-left text-outline">APR 2027</span>
+      <span className={`${phase === "open" ? "text-white" : ""}`}>Counter Placeholder</span>
 
       {/* room above the box for the card to come out */}
       <div className="mt-45 mb-8">
@@ -53,41 +56,41 @@ export default function Home() {
           role="button"
           onClick={handleClick}
         >
-          <div className="cube">
-            <div className="shaker">
-              <div className="box">
-                {/* inside */}
-                <div className="face face--back" />
-                <div className="face face--left" />
-                <div className="face face--bottom" />
-              </div>
-
-              {/* what's in the box */}
-              <div className="card">
-                <div className="reveal">
-                  <div className="card-scale">
-                    <div className="card-content flex flex-col items-center justify-center text-white">
-                      <span className="text-xs font-mono">Save the date</span>
-                      <span className="text-1xl font-craze font-bold text-shadow-[4px_4px_0_#f84535] items-left text-outline">APR 2027</span>
-                      <img src={theme_photo.src} className="w-32 h-auto object-contain" />
-                    </div>
-                  </div>
+          <div className="cube-spin">
+            <div className="cube">
+              <div className="shaker">
+                <div className="box">
+                  {/* inside */}
+                  <div className="face face--back" />
+                  <div className="face face--left" />
+                  <div className="face face--bottom" />
                 </div>
-              </div>
 
-              <div className="box">
-                <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
-                <div className={`face face--right bg-clash-right ${faceText}`}>27</div>
-                {flaps.map(({ side, pair, color }) => (
-                  <div key={side} className={`flap-wrap flap-wrap--${side} flap-wrap--${pair}`}>
-                    <div className="flap-hinge">
-                      <div className="flap">
-                        <div className="flap-side flap-side--inner" />
-                        <div className={`flap-side flap-side--outer ${color}`} />
+                {/* what's in the box */}
+                <div className="card">
+                  <div className="reveal">
+                    <div className="card-scale">
+                      <div className="card-content flex flex-col items-center justify-center text-white">
+                        <img src={theme_photo.src} className="w-32 h-auto object-contain" />
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
+
+                <div className="box">
+                  <div className={`face face--front bg-clash-left ${faceText}`}>EH</div>
+                  <div className={`face face--right bg-clash-right ${faceText}`}>27</div>
+                  {flaps.map(({ side, pair, color }) => (
+                    <div key={side} className={`flap-wrap flap-wrap--${side} flap-wrap--${pair}`}>
+                      <div className="flap-hinge">
+                        <div className="flap">
+                          <div className="flap-side flap-side--inner" />
+                          <div className={`flap-side flap-side--outer ${color}`} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
